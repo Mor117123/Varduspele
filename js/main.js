@@ -1,6 +1,6 @@
 
 
-        Sākt.onclick=()=>{
+        document.getElementById("Sakt").onclick=()=>{
             sakt();
             let vards=sajauc(randomVards());
             document.getElementById("sajauktsVards").innerHTML = vards;
