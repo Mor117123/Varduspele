@@ -2,6 +2,9 @@
 
         document.getElementById("Sakt").onclick=()=>{
             sakt();
+            let number = document.getElementById("number").value;
+            generateButtons(number);
+            
             let vards=sajauc(randomVards());
             document.getElementById("sajauktsVards").innerHTML = vards;
             
@@ -10,9 +13,53 @@
             document.getElementById("Burts3").innerHTML = vards[2];
             document.getElementById("Burts4").innerHTML = vards[3];
             document.getElementById("Burts5").innerHTML = vards[4];
-            document.getElementById("Burts6").innerHTML = vards[5];
-            document.getElementById("Burts7").innerHTML = vards[6];
+            //document.getElementById("Burts6").innerHTML = vards[5];
+            //document.getElementById("Burts7").innerHTML = vards[6];
             
+            
+            
+        }
+        function generateButtons(number){
+            for (let i=0; i<number; i++){
+                let node = document.createElement("div");
+
+                //let textnode = document.createTextNode("Burts"+(i+1));
+
+                node.id="Burts"+(i+1);
+
+                document.getElementById("Burti").appendChild(node);
+                dragElement(document.getElementById("Burts"+(i+1)));
+
+            }
+        }
+        document.getElementById("Check").onclick=()=>{
+            let number = document.getElementById("number").value;
+            
+            let position = document.getElementById("Burts1").offsetLeft;
+            
+            var burtsPos=[{"position":position, "letter": document.getElementById("Burts1").innerHTML}];
+            
+            for (let i=1; i<number; i++){
+                
+                let position = document.getElementById("Burts"+(i+1)).offsetLeft;
+                let burtsPos1 = {"position":position, "letter": document.getElementById("Burts"+(i+1)).innerHTML};
+                burtsPos.push(burtsPos1);
+                
+            }
+            burtsPos.sort((a, b) => {return a.position - b.position;});
+                
+            var sakartots = "";
+            for (let i=0; i<number; i++){
+                
+                var sakartots=sakartots+burtsPos[i].letter;
+            }
+            alert(sakartots);
+            
+            if(sakartots===nesajaukts){
+                alert("True");
+            }else{
+                alert("False");
+            }
             
             
         }
@@ -20,7 +67,7 @@
             
         var vardi=["SAULE", "PĒRKONS","DAUGAVA"];
         function randomVards(){
-            let i=1;
+            let i=0;
             return vardi[i];
         }
         
@@ -67,7 +114,7 @@
             
             
             
-            dragElement(document.getElementById("Burtia"));
+            //dragElement(document.getElementById("Burti"));
 
             function dragElement(elmnt) {
                 let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -105,8 +152,8 @@
 
                 function closeDragElement() {
                     // stop moving when mouse button is released:
-                document.onmouseup = null;
-                document.onmousemove = null;
+                    document.onmouseup = null;
+                    document.onmousemove = null;
                 }
             }
             
