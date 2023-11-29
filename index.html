@@ -44,13 +44,55 @@
             #more {display: none;}
             
             
-            #Burti {
+            #Burts1 {
+                position: absolute;
+                z-index: 9;
+                background-color: #f1f1f1;
+                text-align: center;
+                border: 1px solid #d3d3d3;
+            } 
+            #Burts2 {
                 position: absolute;
                 z-index: 9;
                 background-color: #f1f1f1;
                 text-align: center;
                 border: 1px solid #d3d3d3;
             }   
+            #Burts3 {
+                position: absolute;
+                z-index: 9;
+                background-color: #f1f1f1;
+                text-align: center;
+                border: 1px solid #d3d3d3;
+            }   
+            #Burts4 {
+                position: absolute;
+                z-index: 9;
+                background-color: #f1f1f1;
+                text-align: center;
+                border: 1px solid #d3d3d3;
+            }  
+            #Burts5 {
+                position: absolute;
+                z-index: 9;
+                background-color: #f1f1f1;
+                text-align: center;
+                border: 1px solid #d3d3d3;
+            }  
+            #Burts6 {
+                position: absolute;
+                z-index: 9;
+                background-color: #f1f1f1;
+                text-align: center;
+                border: 1px solid #d3d3d3;
+            }  
+            #Burts7 {
+                position: absolute;
+                z-index: 9;
+                background-color: #f1f1f1;
+                text-align: center;
+                border: 1px solid #d3d3d3;
+            }  
 
             #Burtiheader {
                 padding: 10px;
@@ -125,14 +167,13 @@
           <form id="numberForm">
             <label for="number">Enter a number: </label>
             <input type="text" id="number" required>
-            <button type="button" id="Sakt">Sākt</button>            
+            <button type="button" id="Sakt">Sākt</button>      
+            <button type="button" id="Check">Check</button>    
             <p id="sajauktsVards"></p>
             <p id="demo"></p>
           </form>
-            <div id="Burti"> 
-                <div id="Burts1"></div> 
-                <div id="Burts2"></div> 
-            </div>
+            <div id="Burti"> </div>
+            
                 
             
             
@@ -169,7 +210,12 @@
     btnText.innerHTML = "Read less"; 
     moreText.style.display = "inline";
   }
+
         }
+        function getPositionXY(element) { 
+                var rect = element.getBoundingClientRect(); 
+                alert(rect.X);
+            } 
         function openPage(pageName,elmnt,color) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
