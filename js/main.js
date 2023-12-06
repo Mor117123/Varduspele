@@ -1,4 +1,4 @@
-
+        var checker;
 
         document.getElementById("Sakt").onclick=()=>{
             sakt();
@@ -26,11 +26,13 @@
                 //let textnode = document.createTextNode("Burts"+(i+1));
 
                 node.id="Burts"+(i+1);
-
                 document.getElementById("Burti").appendChild(node);
                 dragElement(document.getElementById("Burts"+(i+1)));
-
+                let pos=i*100+400;
+                document.getElementById("Burts"+(i+1)).style.left = pos+"px";
+                
             }
+            
         }
         document.getElementById("Check").onclick=()=>{
             let number = document.getElementById("number").value;
@@ -45,6 +47,7 @@
                 let burtsPos1 = {"position":position, "letter": document.getElementById("Burts"+(i+1)).innerHTML};
                 burtsPos.push(burtsPos1);
                 
+                
             }
             burtsPos.sort((a, b) => {return a.position - b.position;});
                 
@@ -53,7 +56,9 @@
                 
                 var sakartots=sakartots+burtsPos[i].letter;
             }
-            alert(sakartots);
+            //alert(sakartots);
+            
+            nesajaukts=randomVards();
             
             if(sakartots===nesajaukts){
                 alert("True");
@@ -61,14 +66,30 @@
                 alert("False");
             }
             
-            
+            //let points =countPoints();
+            let distance = setInterval(skaita, 1000);
+            alert(distance);
         }
     
+        function countPoints(){
             
+            let points = document.getElementById("number").value*5 +document.getElementById("timer")*10;
+            
+            return points;
+        }  
+          
         var vardi=["SAULE", "PĒRKONS","DAUGAVA"];
         function randomVards(){
-            let i=0;
-            return vardi[i];
+            if(checker===0){
+                let i=0;
+                checker++;
+                return vardi[i];
+            }else{
+                let i=0;
+                checker=0;
+                return vardi[i];
+            }
+            
         }
         
         function sajauc(vards){
@@ -96,20 +117,21 @@
             function skaita() {
                 let now = new Date().getTime();
                 // Find the distance between now and the count down date
-                let distance = now - countDownDate;
+                var distance = now - countDownDate;
 
                 // Time calculations for days, hours, minutes and seconds
                 let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                // Output the result in an element with id="demo"
-                document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s ";
+                
+                document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
 
-                // If the count down is over, write some text 
-                if (distance > 5000) {
+                // If the count down is over, write some text
+                if (distance > 10000) {
                     clearInterval(spele);
-                    document.getElementById("demo").innerHTML = "EXPIRED";
+                    document.getElementById("timer").innerHTML = "EXPIRED";
                 }
+                return seconds;
             }
             
             
