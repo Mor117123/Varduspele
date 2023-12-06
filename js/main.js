@@ -66,16 +66,15 @@
                 alert("False");
             }
             
-            //let points =countPoints();
-            let distance = setInterval(skaita, 1000);
-            alert(distance);
+
+            alert(countPoints());
         }
     
         function countPoints(){
             
-            let points = document.getElementById("number").value*5 +document.getElementById("timer")*10;
+            let points = document.getElementById("number").value*5 -distance/1000;
             
-            return points;
+            return Math.round(points);
         }  
           
         var vardi=["SAULE", "PĒRKONS","DAUGAVA"];
@@ -117,7 +116,7 @@
             function skaita() {
                 let now = new Date().getTime();
                 // Find the distance between now and the count down date
-                var distance = now - countDownDate;
+                 distance = now - countDownDate;
 
                 // Time calculations for days, hours, minutes and seconds
                 let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
