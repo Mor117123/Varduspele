@@ -1,8 +1,10 @@
         var checker;
 
         document.getElementById("Sakt").onclick=()=>{
+            document.getElementById("Sakt").disabled = true;
+            document.getElementById("Check").disabled = false;
             sakt();
-            let number = document.getElementById("number").value;
+            number = document.getElementById("number").value;
             generateButtons(number);
             
             let vards=sajauc(randomVards());
@@ -13,8 +15,8 @@
             document.getElementById("Burts3").innerHTML = vards[2];
             document.getElementById("Burts4").innerHTML = vards[3];
             document.getElementById("Burts5").innerHTML = vards[4];
-            //document.getElementById("Burts6").innerHTML = vards[5];
-            //document.getElementById("Burts7").innerHTML = vards[6];
+            document.getElementById("Burts6").innerHTML = vards[5];
+            document.getElementById("Burts7").innerHTML = vards[6];
             
             
             
@@ -60,14 +62,18 @@
             
             nesajaukts=randomVards();
             
-            if(sakartots===nesajaukts){
+            if(sakartots==nesajaukts){
                 alert("True");
+                alert("+"+countPoints()+ " points!");
+                document.getElementById("Sakt").disabled = false;
+                document.getElementById("Check").disabled = true;
             }else{
                 alert("False");
+                //alert("0 points!");
             }
             
 
-            alert(countPoints());
+            
         }
     
         function countPoints(){
@@ -77,17 +83,47 @@
             return Math.round(points);
         }  
           
-        var vardi=["SAULE", "PĒRKONS","DAUGAVA"];
+        var vardi3=["BŪT", "GŪT", "ALA", "IET", "CIK"];
+        var vardi4=["RAKT", "ZEME", "ĀTRS", "GALS", "MALA"];
+        var vardi5=["SAULE", "VARDS", "LAUZT", "ZIRGS", "VEZIS"];
+        var vardi6=["DZĪVOT", "PAKĀPE", "KOMATS", "MILZIS", "SNIEGS"];
+        var vardi7=["DAUGAVA", "PĒRKONS", "TEIKUMS", "VĒSTULE", "DZIEDĀT"];
         function randomVards(){
-            if(checker===0){
-                let i=0;
-                checker++;
-                return vardi[i];
-            }else{
-                let i=0;
+            if(checker!==0){
+                i=Math.floor((Math.random() * 5))
+                alert(i);
                 checker=0;
-                return vardi[i];
+                if(number==3){
+                    return vardi3[i];
+                }else if(number==4){
+                    return vardi4[i];
+                }else if(number==5){
+                    return vardi5[i];
+                }else if(number==6){
+                    return vardi6[i];
+                }else if(number==7){
+                    return vardi7[i];
+                }
+                
+                
+            }else{
+            //if(checker===0){
+                alert(i);
+                checker++;
+                if(number==3){
+                    return vardi3[i];
+                }else if(number==4){
+                    return vardi4[i];
+                }else if(number==5){
+                    return vardi5[i];
+                }else if(number==6){
+                    return vardi6[i];
+                }else if(number==7){
+                    return vardi7[i];
+                }
             }
+            //var i=Math.floor((Math.random() * 4) +0);
+            
             
         }
         
@@ -135,7 +171,6 @@
             
             
             
-            //dragElement(document.getElementById("Burti"));
 
             function dragElement(elmnt) {
                 let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
