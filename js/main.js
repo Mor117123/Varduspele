@@ -1,23 +1,26 @@
-        var checker;
-
+       var checker;
+       var totalPoints;
+       document.getElementById("Check").disabled = true;
+            
         document.getElementById("Sakt").onclick=()=>{
-            document.getElementById("Sakt").disabled = true;
-            document.getElementById("Check").disabled = false;
-            sakt();
-            number = document.getElementById("number").value;
-            generateButtons(number);
             
-            let vards=sajauc(randomVards());
-            document.getElementById("sajauktsVards").innerHTML = vards;
+            number = Math.floor(document.getElementById("number").value);
+            if(typeof number === "number" & (number>2 & number<8)){
+                
+                sakt(1000);
+                generateButtons(number);
+                document.getElementById("Sakt").disabled = true;
+                document.getElementById("Check").disabled = false;
+                let vards=sajauc(randomVards());
+                document.getElementById("sajauktsVards").innerHTML = vards;
+                
+                for(let i=0; i<number; i++){
+                    document.getElementById("Burts"+(i+1)).innerHTML = vards[i];
+                }
             
-            document.getElementById("Burts1").innerHTML = vards[0];
-            document.getElementById("Burts2").innerHTML = vards[1];
-            document.getElementById("Burts3").innerHTML = vards[2];
-            document.getElementById("Burts4").innerHTML = vards[3];
-            document.getElementById("Burts5").innerHTML = vards[4];
-            document.getElementById("Burts6").innerHTML = vards[5];
-            document.getElementById("Burts7").innerHTML = vards[6];
-            
+            }else{
+                alert("invalid number");
+            }
             
             
         }
@@ -55,31 +58,42 @@
                 
             var sakartots = "";
             for (let i=0; i<number; i++){
-                
                 var sakartots=sakartots+burtsPos[i].letter;
             }
-            //alert(sakartots);
-            
+
             nesajaukts=randomVards();
             
             if(sakartots==nesajaukts){
-                alert("True");
                 alert("+"+countPoints()+ " points!");
                 document.getElementById("Sakt").disabled = false;
                 document.getElementById("Check").disabled = true;
             }else{
-                alert("False");
-                //alert("0 points!");
+                alert("0 points!");
             }
+            wordsGuessed=wordsGuessed+1;
+            document.getElementById("wordsLeft").innerHTML="Words left: "+(5-wordsGuessed);
             
 
             
+        }
+        
+        document.getElementById("restart").onclick=()=>{
+            wordsGuessed=0;
+            document.getElementById("Sakt").disabled = false;
+            document.getElementById("Check").disabled = true;
+            for(let i=0; i<number; i++){
+                    document.getElementById("Burts"+(i+1)).innerHTML = "";
+            }
+            totalPoints=0;
+            checker=1;
+            //sakt(0);
+            countDownDate=10000;
         }
     
         function countPoints(){
             
             let points = document.getElementById("number").value*5 -distance/1000;
-            
+            totalPoints=totalPoints+points;
             return Math.round(points);
         }  
           
@@ -90,8 +104,8 @@
         var vardi7=["DAUGAVA", "PĒRKONS", "TEIKUMS", "VĒSTULE", "DZIEDĀT"];
         function randomVards(){
             if(checker!==0){
-                i=Math.floor((Math.random() * 5))
-                alert(i);
+                i=Math.floor((Math.random() * 5));
+                //alert(i);
                 checker=0;
                 if(number==3){
                     return vardi3[i];
@@ -107,8 +121,7 @@
                 
                 
             }else{
-            //if(checker===0){
-                alert(i);
+                //alert(i);
                 checker++;
                 if(number==3){
                     return vardi3[i];
@@ -122,7 +135,6 @@
                     return vardi7[i];
                 }
             }
-            //var i=Math.floor((Math.random() * 4) +0);
             
             
         }
@@ -144,15 +156,15 @@
         
         // no https://www.w3schools.com/howto/howto_js_countdown.asp 
             var countDownDate, spele;
-            function sakt() {
+            function sakt(time) {
                 countDownDate = new Date().getTime();
-                spele = setInterval(skaita, 1000);
+                spele = setInterval(skaita, time);
             }
         // Update the count down every 1 second
             function skaita() {
                 let now = new Date().getTime();
                 // Find the distance between now and the count down date
-                 distance = now - countDownDate;
+                distance = now - countDownDate;
 
                 // Time calculations for days, hours, minutes and seconds
                 let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));

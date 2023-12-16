@@ -43,6 +43,10 @@
             }
             #more {display: none;}
             
+            #restart {
+                position: relative; 
+                left: 600px;
+            }
             
             #Burts1 {
                 
@@ -165,12 +169,14 @@
       <div>
           <h1>Play!</h1>
           <form id="numberForm">
-            <label for="number">Enter a number: </label>
+            <label for="number">Enter a number(between 3 and 8): </label>
             <input type="text" id="number" required>
             <button type="button" id="Sakt">Sākt</button>      
             <button type="button" id="Check">Check</button>    
             <p id="sajauktsVards"></p>
             <p id="timer"></p>
+            <button type="button" id="restart">restart</button>   
+            <p id="wordsLeft"></p>
           </form>
             <div id="Burti"> </div>
             
