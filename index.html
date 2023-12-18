@@ -47,6 +47,10 @@
                 position: relative; 
                 left: 600px;
             }
+            #guessFirtsLetter {
+                position: relative; 
+                left: 600px;
+            }
             
             #Burts1 {
                 
@@ -174,12 +178,16 @@
             <button type="button" id="Sakt">Sākt</button>      
             <button type="button" id="Check">Check</button>    
             <p id="sajauktsVards"></p>
-            <p id="timer"></p>
+            
             <button type="button" id="restart">restart</button>   
+            <button type="button" id="guessFirtsLetter">guess firts letter</button>  
             <p id="wordsLeft"></p>
           </form>
             <div id="Burti"> </div>
+            <div id="letterBoxes"> </div>
+        <!--<img src="img/letterBox.jpg" alt="letterBox"> -->
             
+            <p id="timer"></p>
                 
             
             
@@ -190,7 +198,7 @@
       <hr>
 
       <footer>
-        <p>&copy; Company 2015</p>
+        <p id="footer">&copy; Company 2015</p>
       </footer>
     </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>

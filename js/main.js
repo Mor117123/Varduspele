@@ -1,9 +1,10 @@
        var checker;
        var totalPoints;
+       var nesajaukts;
        document.getElementById("Check").disabled = true;
             
         document.getElementById("Sakt").onclick=()=>{
-            
+            wordsGuessed=0;
             number = Math.floor(document.getElementById("number").value);
             if(typeof number === "number" & (number>2 & number<8)){
                 
@@ -12,6 +13,7 @@
                 document.getElementById("Sakt").disabled = true;
                 document.getElementById("Check").disabled = false;
                 let vards=sajauc(randomVards());
+                nesajaukts=randomVards();
                 document.getElementById("sajauktsVards").innerHTML = vards;
                 
                 for(let i=0; i<number; i++){
@@ -35,6 +37,16 @@
                 dragElement(document.getElementById("Burts"+(i+1)));
                 let pos=i*100+400;
                 document.getElementById("Burts"+(i+1)).style.left = pos+"px";
+                
+                let node1 = document.createElement("img");
+                node1.id="letterBox"+(i+1);
+                node1.src = "img/letterBox.jpg";
+                document.getElementById("letterBoxes").appendChild(node1);
+                dragElement(document.getElementById("letterBox"+(i+1)));
+                pos1=i*20+40;
+                document.getElementById("letterBox"+(i+1)).style.left = pos1+"px";
+                
+                 
                 
             }
             
@@ -60,20 +72,27 @@
             for (let i=0; i<number; i++){
                 var sakartots=sakartots+burtsPos[i].letter;
             }
-
-            nesajaukts=randomVards();
             
             if(sakartots==nesajaukts){
                 alert("+"+countPoints()+ " points!");
-                document.getElementById("Sakt").disabled = false;
-                document.getElementById("Check").disabled = true;
             }else{
                 alert("0 points!");
             }
+            document.getElementById("Sakt").disabled = false;
+            document.getElementById("Check").disabled = true;
+                
             wordsGuessed=wordsGuessed+1;
             document.getElementById("wordsLeft").innerHTML="Words left: "+(5-wordsGuessed);
             
-
+            function removeAllChildNodes(parent) {
+                while (parent.firstChild) {
+                    parent.removeChild(parent.firstChild);
+                }
+            }
+            let container = document.querySelector('#letterBoxes');
+            removeAllChildNodes(container);
+            container = document.querySelector('#Burti');
+            removeAllChildNodes(container);
             
         }
         
@@ -88,6 +107,31 @@
             checker=1;
             //sakt(0);
             countDownDate=10000;
+            
+            function removeAllChildNodes(parent) {
+                while (parent.firstChild) {
+                    parent.removeChild(parent.firstChild);
+                }
+            }
+            const container = document.querySelector('#letterBoxes');
+            removeAllChildNodes(container);
+        }
+        
+        document.getElementById("guessFirtsLetter").onclick=()=>{
+            for(let i=0; i<nesajaukts.length; i++){
+                if(document.getElementById("Burts"+(i+1)).innerHTML===nesajaukts.slice(0,1)){
+                   
+                    var bodyRect = document.getElementById("numberForm").getBoundingClientRect(),
+                        elemRect = document.getElementById("letterBoxes").getBoundingClientRect(),
+                        offset   = elemRect.top - bodyRect.top;
+                    
+                    document.getElementById("Burts"+(i+1)).style.left =  document.getElementById("letterBoxes").getBoundingClientRect().left+10+"px";
+                    document.getElementById("Burts"+(i+1)).style.top = offset.top+"px";
+                    
+                    document.getElementById("guessFirtsLetter").disabled = true;
+                    return;
+                }   
+            }
         }
     
         function countPoints(){
@@ -174,9 +218,9 @@
                 document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
 
                 // If the count down is over, write some text
-                if (distance > 10000) {
+                if (distance > 60000) {
                     clearInterval(spele);
-                    document.getElementById("timer").innerHTML = "EXPIRED";
+                    document.getElementById("timer").innerHTML = "Time is up!";
                 }
                 return seconds;
             }
